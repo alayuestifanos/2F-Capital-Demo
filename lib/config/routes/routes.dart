@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../features/log_in/presentation/pages/pages.dart';
 import '../../features/sign_up/presentation/pages/pages.dart';
 
 class AppRoutes {
@@ -19,7 +20,10 @@ class AppRoutes {
         return go(
           to: Register(),
         );
-     
+      case Login.routeName:
+        return go(
+          to: Login(),
+        );
       // case Homepage.routeName:
       //   return go(
       //     to: const Homepage(),
