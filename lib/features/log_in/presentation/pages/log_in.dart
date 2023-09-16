@@ -1,12 +1,13 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:two_f_demo/config/routes/routes.dart';
 import 'package:two_f_demo/core/widgets/common_widgets.dart';
 import 'package:two_f_demo/features/log_in/data/models/log_in_model.dart';
 import 'package:two_f_demo/features/log_in/presentation/bloc/login_bloc.dart';
 import 'package:two_f_demo/features/log_in/presentation/bloc/login_event.dart';
 import 'package:two_f_demo/features/sign_up/presentation/widgets/widgets.dart';
-
+import 'package:two_f_demo/features/ui_test/presentation/pages/pages.dart';
 import 'package:two_f_demo/injection_container.dart';
 
 import '../bloc/login_state.dart';
@@ -40,6 +41,10 @@ class Login extends StatelessWidget {
             );
             emailController.text = "";
             passwordController.text = "";
+            var route = AppRoutes.go(
+              to: HomeScreen(user: state.user),
+            );
+            Navigator.push(context, route);
           }
           if (state is LoginFailed) {
             ScaffoldMessenger.of(context).showSnackBar(

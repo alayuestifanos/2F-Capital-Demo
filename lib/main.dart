@@ -6,7 +6,7 @@ import 'package:two_f_demo/config/theme/app_themes.dart';
 import 'package:two_f_demo/core/helper/shared_preferences_helper.dart';
 import 'package:two_f_demo/features/sign_up/data/models/user_model.dart';
 import 'package:two_f_demo/features/sign_up/presentation/pages/register.dart';
-
+import 'package:two_f_demo/features/ui_test/presentation/pages/pages.dart';
 import "injection_container.dart" as di;
 import 'injection_container.dart';
 
@@ -31,7 +31,11 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: theme(),
-      home: Register(),
+      home: user == null
+          ? Register()
+          : HomeScreen(
+              user: user!,
+            ),
       onGenerateRoute: AppRoutes.onGenerateRoute,
     );
   }

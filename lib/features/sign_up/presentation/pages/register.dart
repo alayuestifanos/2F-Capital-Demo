@@ -1,14 +1,14 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-
+import 'package:two_f_demo/config/routes/routes.dart';
 import 'package:two_f_demo/core/widgets/common_widgets.dart';
-
+import 'package:two_f_demo/features/log_in/presentation/pages/log_in.dart';
 import 'package:two_f_demo/features/sign_up/data/models/user_model.dart';
 import 'package:two_f_demo/features/sign_up/presentation/bloc/sign_up_event.dart';
-
+import 'package:two_f_demo/features/sign_up/presentation/pages/pages.dart';
 import 'package:two_f_demo/features/sign_up/presentation/widgets/custom_text_field.dart';
 import 'package:two_f_demo/injection_container.dart';
 
@@ -45,8 +45,13 @@ class Register extends StatelessWidget {
                 content: Text("Register Success "),
               ),
             );
-           
-          
+            var route = AppRoutes.go(
+              to: OTPScreen(
+                phoneNumber: state.user.phone!,
+              ),
+            );
+
+            Navigator.push(context, route);
           } else if (state is SignUpFailed) {
             firstNameController.text = "";
             lastNameController.text = "";
@@ -230,7 +235,11 @@ class Register extends StatelessWidget {
                         ),
                         TextButton(
                           onPressed: () {
-                           
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              Login.routeName,
+                              (route) => false,
+                            );
                           },
                           child: const Text(
                             'Sign In',
