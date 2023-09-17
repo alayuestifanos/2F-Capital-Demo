@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:two_f_demo/features/ui_test/presentation/widgets/logout_alert_dialog.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -13,36 +14,53 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Center(
       child: Column(
         children: [
-          Stack(children: [
-            Container(
-              decoration: const BoxDecoration(
-                color: Colors.transparent,
-                image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: AssetImage(
-                    'assets/images/background.jpeg',
+          Stack(
+            children: [
+              Container(
+                decoration: const BoxDecoration(
+                  color: Colors.transparent,
+                  image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: AssetImage(
+                      'assets/images/background.jpeg',
+                    ),
                   ),
                 ),
+                height: 350.0,
               ),
-              height: 350.0,
+              Container(
+                height: 350.0,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    gradient: LinearGradient(
+                        begin: FractionalOffset.topCenter,
+                        end: FractionalOffset.bottomCenter,
+                        colors: [
+                          const Color.fromARGB(255, 14, 6, 85).withOpacity(0.7),
+                          const Color.fromARGB(255, 20, 9, 117)
+                              .withOpacity(0.7),
+                        ],
+                        stops: const [
+                          0.0,
+                          1.0
+                        ])),
+              )
+            ],
+          ),
+          ListTile(
+            onTap: () {},
+            leading: const Icon(Icons.logout),
+            title: TextButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => const LogOutDialog(),
+                  barrierDismissible: false,
+                );
+              },
+              child: const Text("Log out"),
             ),
-            Container(
-              height: 350.0,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  gradient: LinearGradient(
-                      begin: FractionalOffset.topCenter,
-                      end: FractionalOffset.bottomCenter,
-                      colors: [
-                        const Color.fromARGB(255, 14, 6, 85).withOpacity(0.7),
-                        const Color.fromARGB(255, 20, 9, 117).withOpacity(0.7),
-                      ],
-                      stops: const [
-                        0.0,
-                        1.0
-                      ])),
-            )
-          ]),
+          ),
           Expanded(
             child: ListView.separated(
               itemCount: 25,
